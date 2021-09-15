@@ -10,11 +10,13 @@ import com.flightbooking.repos.AirlineRepository;
 import com.flightbooking.repos.AirlineScheduleRepository;
 import com.flightbooking.repos.SeatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+@Service
 public class SeatsService {
 
     @Autowired
@@ -41,7 +43,9 @@ public class SeatsService {
         seats.setAirline(airline);
         seats.setAirlineSchedule(airlineSchedule);
         seatsRepository.save(seats);
-        airlineSchedule.setSeats(seats);
+        Seats dbSeats = seatsRepository.findSeatByAirlineScheduleIdAndFlightNumber(
+                airlineSchedule.getId());
+        airlineSchedule.setSeats(dbSeats);
         airlineScheduleRepository.save(airlineSchedule);
         return seatsDto;
         }catch (Exception e){

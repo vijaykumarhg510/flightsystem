@@ -4,11 +4,12 @@ package com.flightbooking.data;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class Seats {
-
+public class Seats implements Serializable {
+private static final long serialVersionUID=1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,7 +20,7 @@ public class Seats {
     private int noOfRows;
     private boolean isFilled = false;
 
-    @OneToOne(targetEntity = Airline.class)
+    @ManyToOne(targetEntity = Airline.class)
     @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
     private Airline airline;
 

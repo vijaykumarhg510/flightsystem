@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class AirlineSchedule implements Serializable {
 
-    public static final long serialVersionUID = 2L;
+    public static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +34,21 @@ public class AirlineSchedule implements Serializable {
     @Convert(converter = ListToString.class)
     private List<String> workingDays;
 
-//    @OneToOne
-//    @JoinColumn(name="seats_id")
-//    private Seats seats;
+ @OneToOne(targetEntity = Seats.class)
+ @JoinColumn(name="seats_id",referencedColumnName = "id")
+ private Seats seats;
 
 
     @ManyToOne(targetEntity = Airline.class)
     @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",
             nullable = true)
     private Airline airline;
+
+    @Override
+    public String toString() {
+        return "Airline" + "-" + airline.getAirlineNumber() + " of id " + id + " works on " + workingDays
+                + " departs from " + fromPlace + " at " + startDateTime + " reaches " + toPlace +
+                " at " + endDateTime;
+    }
 
 }

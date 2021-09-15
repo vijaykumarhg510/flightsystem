@@ -43,18 +43,18 @@ public class BookingService {
     private SeatsRepository seatsRepository;
 
 
-    public BookingDto createBookingByFlightNumber(String flightNumber){
+    public BookingDto createBookingByFlightNumber(String flightNumber,BookingDto bookingDto){
         try{
+            Booking booking = bookingMapper.map(bookingDto,Booking.class);
             AirlineSchedule airlineSchedule = get.getAirlineSchedule(flightNumber);
             Seats seats = seatsRepository.findByAirlineScheduleId(airlineSchedule.getId());
-            if()
+            //if(//seats not filled)
                 Airline airline = airlineRepository.findByAirlineNumber(flightNumber);
-                Booking booking = new Booking();
                 booking.setAirline(airline);
                 booking.setAirlineSchedule(airlineSchedule);
                 booking.setPnr(UUID.randomUUID().toString());
                 booking.setSeatNumber(UUID.randomUUID().toString());
-                BookingDto bookingDto = bookingMapper.map(booking,BookingDto.class);
+                bookingDto = bookingMapper.map(booking,BookingDto.class);
                 bookingRepository.save(booking);
                 return bookingDto;
         }catch(Exception e){

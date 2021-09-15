@@ -14,16 +14,18 @@ public class Booking {
     private String seatNumber;
     private String pnr;
     private boolean business;
-//    private String food = ()
+    private boolean veg;
+    private double totalCost;
 
+    @OneToOne(targetEntity = Guest.class)
+    @JoinColumn(name="guest_id",referencedColumnName = "id",nullable = false)
+    private Guest guest;
 
-//    private String email;
-
-    @OneToOne(targetEntity = Airline.class)
+    @ManyToOne(targetEntity = Airline.class)
     @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
     private Airline airline;
 
-    @OneToOne
+    @OneToOne(targetEntity = AirlineSchedule.class)
     @JoinColumn(name="airline_schedule_id",referencedColumnName = "id",nullable = false)
     private AirlineSchedule airlineSchedule;
 

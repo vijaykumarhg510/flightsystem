@@ -11,4 +11,7 @@ public interface SeatsRepository extends JpaRepository<Seats,Integer> {
 
     @Query(value="SELECT * from Seats WHERE airline_schedule=?1",nativeQuery = true)
     Seats findByAirlineScheduleId(int id);
+
+    @Query(value="SELECT * from Seats WHERE airline_schedule_id=?1",nativeQuery = true)
+    Seats findSeatByAirlineScheduleIdAndFlightNumber(int id);
 }

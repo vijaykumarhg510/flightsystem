@@ -16,8 +16,8 @@ public class BookingController {
     BookingService bookingService;
 
     @PostMapping({"/add/{flightNumber}"})
-    public BookingDto createBookingByFlightNumber(@PathVariable String flightNumber){
-        return bookingService.createBookingByFlightNumber(flightNumber);
+    public BookingDto createBookingByFlightNumber(@PathVariable String flightNumber,@RequestBody BookingDto bookingDto){
+        return bookingService.createBookingByFlightNumber(flightNumber,bookingDto);
     }
 
     @PutMapping("/edit/{flightNumber}")
@@ -27,6 +27,7 @@ public class BookingController {
 
     @GetMapping("/getAll")
     public List<BookingDto> getAllBookings(){
+
         return null;
     }
 }

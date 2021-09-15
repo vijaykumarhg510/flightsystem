@@ -12,4 +12,5 @@ public class BookingDto {
     private String seatNumber;
     private String pnr;
     private boolean business;
+    private boolean veg;
 }
