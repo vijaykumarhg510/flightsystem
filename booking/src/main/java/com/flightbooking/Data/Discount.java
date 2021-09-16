@@ -15,11 +15,11 @@ public class Discount implements Serializable {
     private double discountAmount;
     private String discountCode;
 
-    @OneToOne(targetEntity = Airline.class)
-    @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
-    private Airline airline;
-
-    public void setAirline(Airline airline) {
-      this.airline = airline;
-   }
+//    @OneToOne(targetEntity = Airline.class)
+//    @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
+//    private Airline airline;
+//
+//    public void setAirline(Airline airline) {
+//      this.airline = airline;
+//   }
 }

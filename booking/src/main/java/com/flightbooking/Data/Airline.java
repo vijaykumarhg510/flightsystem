@@ -30,8 +30,8 @@ public class Airline implements Serializable {
 //    @EqualsAndHashCode.Exclude
     private Set<AirlineSchedule> airlineSchedule;
 
-    @OneToOne(mappedBy = "airline",targetEntity = Discount.class)
-    private Discount discount;
+//    @OneToOne(mappedBy = "airline",targetEntity = Discount.class)
+//    private Discount discount;
 
 //    @ToString.Exclude
 //    @EqualsAndHashCode.Exclude

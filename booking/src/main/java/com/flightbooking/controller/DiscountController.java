@@ -5,6 +5,8 @@ import com.flightbooking.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/booking/discounts")
 public class DiscountController {
@@ -12,26 +14,26 @@ public class DiscountController {
     @Autowired
     private DiscountService discountService;
 
-    @PostMapping("/add/{flightNumber}")
-    public DiscountDto addDiscount(@PathVariable String flightNumber,@RequestBody DiscountDto discountDto){
+    @PostMapping("/add")
+    public DiscountDto addDiscount(@RequestBody DiscountDto discountDto){
 
-        return discountService.addDiscount(flightNumber, discountDto);
+        return discountService.addDiscount( discountDto);
     }
-    @PutMapping("/edit/{flightNumber}")
-    public DiscountDto modifyDiscount(@PathVariable String flightNumber,@RequestBody DiscountDto discountDto){
+    @PutMapping("/edit/{id}")
+    public DiscountDto modifyDiscount(@PathVariable int id,@RequestBody DiscountDto discountDto){
 
-        return discountService.modifyDiscount(flightNumber, discountDto);
+        return discountService.modifyDiscount(id, discountDto);
     }
 
-    @GetMapping("/getDiscount/{flightNumber}")
-    public DiscountDto getDiscountByFlightNumber(@PathVariable String flightNumber){
+    @GetMapping("/getDiscount")
+    public List<DiscountDto> getDiscountByFlightNumber(){
 
-        return discountService.getDiscountByFlightNumber(flightNumber);
+        return discountService.getAllDiscounts();
     }
-    @DeleteMapping("/delete/{flightNumber}")
-    public DiscountDto deleteDiscountByFlightNumber(@PathVariable String flightNumber){
+    @DeleteMapping("/delete/{id}")
+    public DiscountDto deleteDiscountByFlightNumber(@PathVariable int id){
 
-        return discountService.deleteDiscountByFlightNumber(flightNumber);
+        return discountService.deleteDiscountByFlightNumber(id);
     }
 
 }

@@ -27,15 +27,15 @@ public class AirlineService {
     private AirlineController airlineController;
 
     public AirlineDto addAirline(AirlineDto airlineDto){
-        if(airlineDto.getAirlineName().isEmpty()){
+        if(!airlineDto.getAirlineName().isEmpty()){
             Airline airline = airlineMapper.map(airlineDto,Airline.class);
             airlineRepository.save(airline);
             AirlineDto savedAirlineDto = airlineMapper.map(airline,AirlineDto.class);
             return savedAirlineDto;
         }else{
             System.out.println("please enter the valid airline name");
+            return null;
         }
-
     }
 
     public AirlineDto modifyAirline(int id,AirlineDto airlineDto){
