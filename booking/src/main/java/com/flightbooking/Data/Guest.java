@@ -3,16 +3,18 @@ package com.flightbooking.Data;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class Guest {
+public class Guest implements Serializable {
+
+    private static final long serialVersionUID=1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String firstName;
-    private String lastName;
+    private String userName;
     private String email;
     private String phone;
     private String address;

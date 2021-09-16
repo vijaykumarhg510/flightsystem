@@ -1,6 +1,8 @@
 package com.flightbooking.Data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +18,7 @@ public class Airline implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    public String airlineNumber;
+    private String airlineNumber;
     private String airlineName;
     private String phone;
 
@@ -24,14 +26,20 @@ public class Airline implements Serializable {
     private String instrument;
 
     @OneToMany(mappedBy = "airline",targetEntity = AirlineSchedule.class)
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
     private Set<AirlineSchedule> airlineSchedule;
 
-    @OneToOne(targetEntity = Discount.class,mappedBy = "airline")
+    @OneToOne(mappedBy = "airline",targetEntity = Discount.class)
     private Discount discount;
 
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity = Booking.class,mappedBy = "airline")
     private List<Booking> booking;
 
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
     @OneToMany(targetEntity = Seats.class,mappedBy = "airline")
     private List<Seats> seats;
 

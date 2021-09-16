@@ -1,12 +1,18 @@
 package com.flightbooking.Data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Data
 @Entity
-public class Seats {
+public class Seats implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +26,8 @@ public class Seats {
 
     @ManyToOne(targetEntity = Airline.class)
     @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
     private Airline airline;
 
     @OneToOne(targetEntity = AirlineSchedule.class)

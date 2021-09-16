@@ -8,4 +8,6 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
 
     @Query(value="SELECT * from Booking WHERE airline_number=?1",nativeQuery = true)
     Booking findByAirlineNumber(String flightNumber);
+
+    Booking findByPnr(String pnr);
 }

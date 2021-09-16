@@ -21,13 +21,13 @@ public class BookingController {
     }
 
     @PutMapping("/edit/{flightNumber}")
-    public BookingDto modifyBookingByFlightNumber(@PathVariable String flightNumber){
-        return bookingService.modifyBookingByFlightNumber(flightNumber);
+    public BookingDto modifyBookingByFlightNumber(@PathVariable String flightNumber,@RequestBody BookingDto bookingDto){
+        return bookingService.modifyBookingByFlightNumber(flightNumber,bookingDto);
     }
 
-    @GetMapping("/getAll")
-    public List<BookingDto> getAllBookings(){
+    @GetMapping("/get/{pnr}")
+    public BookingDto getBookingByPnr(@PathVariable String pnr){
 
-        return null;
+        return bookingService.getBookingByPnr(pnr);
     }
 }

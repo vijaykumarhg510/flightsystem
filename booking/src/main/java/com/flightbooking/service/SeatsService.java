@@ -44,7 +44,7 @@ public class SeatsService {
         seats.setAirlineSchedule(airlineSchedule);
         seatsRepository.save(seats);
         Seats dbSeats = seatsRepository.findSeatByAirlineScheduleIdAndFlightNumber(
-                airlineSchedule.getId());
+                airlineSchedule.getId(),flightNumber);
         airlineSchedule.setSeats(dbSeats);
         airlineScheduleRepository.save(airlineSchedule);
         return seatsDto;

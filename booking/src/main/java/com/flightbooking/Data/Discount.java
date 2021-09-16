@@ -18,4 +18,8 @@ public class Discount implements Serializable {
     @OneToOne(targetEntity = Airline.class)
     @JoinColumn(name="airline_number",referencedColumnName = "airlineNumber",nullable = false)
     private Airline airline;
+
+    public void setAirline(Airline airline) {
+      this.airline = airline;
+   }
 }

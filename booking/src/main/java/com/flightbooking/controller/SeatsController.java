@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/seats")
+@RequestMapping("/booking/seats")
 @RestController
 public class SeatsController {
 
