@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RequestMapping("/airline/inventory/")
+@RequestMapping("/admin/airline")
 @RestController
 
 public class AirlineController {
@@ -20,25 +20,25 @@ public class AirlineController {
     private AirlineService airlineService;
 
 
-    @PostMapping ("/add")
+    @PostMapping ("/inventory/add")
     public AirlineDto addAirline(@RequestBody AirlineDto airlineDto){
 
         return airlineService.addAirline(airlineDto);
 
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/inventory/modify/{id}")
     public AirlineDto modifyAirline(@PathVariable int id,@RequestBody AirlineDto airlineDto){
         return airlineService.modifyAirline(id, airlineDto);
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/inventory/getall")
     public List<Airline> getAllAirlines(){
 
         return airlineService.getAllAirlines();
     }
 
-    @DeleteMapping("/delete/{flightNumber}")
+    @DeleteMapping("/inventory/delete/{flightNumber}")
     public String deleteAirlineByFlightNumber(@PathVariable String flightNumber){
             return deleteAirlineByFlightNumber(flightNumber);
     }

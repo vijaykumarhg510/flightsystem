@@ -2,6 +2,7 @@ package com.flightbooking.service;
 
 import com.flightbooking.Data.*;
 import com.flightbooking.Mapper.BookingMapper;
+import com.flightbooking.config.JwtConfig;
 import com.flightbooking.count.SeatsCount;
 import com.flightbooking.dtos.BookingDto;
 import com.flightbooking.get.GetAirlineScheduleByFlightNumber;
@@ -9,11 +10,9 @@ import com.flightbooking.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.awt.print.Book;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class BookingService {
@@ -43,7 +42,11 @@ public class BookingService {
     @Autowired
     private GuestRepository guestRepository;
 
-    public BookingDto createBookingByFlightNumber(String flightNumber,BookingDto bookingDto){
+    @Autowired
+    private JwtConfig jwtConfig;
+
+    public BookingDto createBookingByFlightNumber(String flightNumber, BookingDto bookingDto,
+                                                  HttpServletRequest httpServletRequest){
         try{
             Booking booking = bookingMapper.map(bookingDto,Booking.class);
             AirlineSchedule airlineSchedule = get.getAirlineSchedule(flightNumber);
@@ -56,7 +59,11 @@ public class BookingService {
                 booking.setPnr(UUID.randomUUID().toString());
                 booking.setSeatNumber(UUID.randomUUID().toString());
                 booking.setTotalCost(totalCost);
-                Guest guest = guestRepository.findIdByEmail(bookingDto.getEmail());
+//                String header = httpServletRequest.getHeader("Authorization");
+//                String token = header.substring(7);
+//                String userName = jwtConfig.getUsernameFromToken(token);
+               Guest guest = guestRepository.findIdByEmail(bookingDto.getEmail());
+//                Guest guest = guestRepository.findGuestByName(userName);
                 guest.setBooking(booking);
                 booking.setGuest(guest);
                 bookingDto = bookingMapper.map(booking,BookingDto.class);
@@ -87,6 +94,18 @@ public class BookingService {
        String email = guestRepository.findEmailByPnr(pnr);
        bookingDto.setEmail(email);
        return bookingDto;
+    }
+
+    public List<Booking> getAllBookings(){
+        List<Booking> bookings = bookingRepository.findAll();
+        return bookings;
+    }
+
+    public BookingDto deleteBookingByPnr(String pnr){
+        Booking booking = bookingRepository.findByPnr(pnr);
+        BookingDto bookingDto = bookingMapper.map(booking,BookingDto.class);
+        bookingRepository.delete(booking);
+        return bookingDto;
     }
 
 }

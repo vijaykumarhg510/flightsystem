@@ -73,7 +73,8 @@ public class SeatsCount {
                 double discountAmount = discount.getDiscountAmount();
                 return discountAmount;
             }else{
-                System.out.println("please enter the valid input");
+                System.out.println("please enter the valid input otherwise discount coupon " +
+                        "will not be applied");
                 return 0;
             }
         }catch (Exception e){

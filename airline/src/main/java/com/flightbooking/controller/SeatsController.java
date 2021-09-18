@@ -1,18 +1,13 @@
 package com.flightbooking.controller;
 
-
-import com.flightbooking.Data.Seats;
 import com.flightbooking.dtos.SeatsDto;
 import com.flightbooking.service.SeatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RequestMapping("/booking/seats")
+@RequestMapping("/admin/seats")
 @RestController
 public class SeatsController {
-
     @Autowired
     private SeatsService seatsService;
 
@@ -28,7 +23,7 @@ public class SeatsController {
 
     @GetMapping("/getAll/{flightNumber}")
     public SeatsDto getSeatsByFlightNumber(@PathVariable String flightNumber){
-            return seatsService.getSeatsByFlightNumber(flightNumber);
+        return seatsService.getSeatsByFlightNumber(flightNumber);
     }
 
     @DeleteMapping("/delete/{flightNumber}")
@@ -36,4 +31,3 @@ public class SeatsController {
         return seatsService.deleteSeatsByFlightNumber(flightNumber);
     }
 }
-

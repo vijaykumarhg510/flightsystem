@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/booking/discounts")
+@RequestMapping("/admin/discounts")
 public class DiscountController {
 
     @Autowired
@@ -36,5 +36,6 @@ public class DiscountController {
         return discountService.deleteDiscountByFlightNumber(id);
     }
 
-}
 
+
+}

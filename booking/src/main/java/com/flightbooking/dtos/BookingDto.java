@@ -9,7 +9,6 @@ import javax.persistence.Convert;
 @Component
 public class BookingDto {
 
-    //need to link with Guest from admin service
     private String email;
     private boolean business;
     private boolean veg;

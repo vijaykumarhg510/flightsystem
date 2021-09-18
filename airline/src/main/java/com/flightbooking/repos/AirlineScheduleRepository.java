@@ -22,4 +22,7 @@ public interface AirlineScheduleRepository extends JpaRepository<AirlineSchedule
             nativeQuery = true)
     List<AirlineSchedule> findAllByFlightNumber(String flightNumber);
 
+    @Query(value="SELECT * from Airline_Schedule WHERE airline_number=?1",nativeQuery = true)
+    List<AirlineSchedule> findByAirlineNumber(String flightNumber);
+
 }

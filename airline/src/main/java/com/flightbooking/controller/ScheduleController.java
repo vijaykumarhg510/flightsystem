@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/airline/schedule")
+@RequestMapping("/admin")
 @RestController
 public class ScheduleController {
 
@@ -17,7 +17,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
 
-    @PostMapping("/add/{flightNumber}")
+    @PostMapping("/schedule/add/{flightNumber}")
     public AirlineScheduleDto addSchedule(@PathVariable String flightNumber, @RequestBody AirlineScheduleDto airlineScheduleDto){
        return scheduleService.addSchedule(flightNumber,airlineScheduleDto);
     }
@@ -28,18 +28,18 @@ public class ScheduleController {
 //        return null;
 //    }
 
-    @GetMapping("/getAll/{flightNumber}")
+    @GetMapping("/schedule/getAll/{flightNumber}")
     public List<AirlineScheduleDto> getAllSchedulesByFlightNumber(@PathVariable String flightNumber){
        return scheduleService.getAllSchedulesByFlightNumber(flightNumber);
     }
 
-    @PutMapping("/edit/{id}/{flightNumber}")
+    @PutMapping("/schedule/edit/{id}/{flightNumber}")
     public AirlineScheduleDto modifySchedule(@PathVariable int id,@PathVariable String flightNumber,
                                              @RequestBody AirlineScheduleDto airlineScheduleDto){
         return scheduleService.modifySchedule(id, flightNumber, airlineScheduleDto);
     }
 
-    @DeleteMapping("/delete/{id}/{flightNumber}")
+    @DeleteMapping("/schedule/delete/{id}/{flightNumber}")
     public String deleteSchedule(@PathVariable int id,@PathVariable String flightNumber){
         return scheduleService.deleteSchedule(id, flightNumber);
     }
